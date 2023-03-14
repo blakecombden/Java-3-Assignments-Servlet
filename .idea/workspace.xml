@@ -9,34 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c608148-a3e7-4b5b-8a98-160c2df4f4da" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Author.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/GetBooks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertBook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/LibraryData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/addauthor.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/addbook.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/viewallbooks.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="5c608148-a3e7-4b5b-8a98-160c2df4f4da" name="Changes" comment="Created DBConnection class and LibraryData servlet. Copied over code for Author and Book classes, as well as DBConfig, from first assignment. Added a GetBooks class. Added addbook, addauthor, and viewallbooks jsp pages, and updated index.jsp." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,11 +115,23 @@
       <option name="presentableId" value="Default" />
       <updated>1678710020689</updated>
       <workItem from="1678710021780" duration="4955000" />
-      <workItem from="1678745013019" duration="6514000" />
+      <workItem from="1678745013019" duration="7047000" />
     </task>
+    <task id="LOCAL-00001" summary="Created DBConnection class and LibraryData servlet. Copied over code for Author and Book classes, as well as DBConfig, from first assignment. Added a GetBooks class. Added addbook, addauthor, and viewallbooks jsp pages, and updated index.jsp.">
+      <created>1678752060864</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678752060864</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Created DBConnection class and LibraryData servlet. Copied over code for Author and Book classes, as well as DBConfig, from first assignment. Added a GetBooks class. Added addbook, addauthor, and viewallbooks jsp pages, and updated index.jsp." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created DBConnection class and LibraryData servlet. Copied over code for Author and Book classes, as well as DBConfig, from first assignment. Added a GetBooks class. Added addbook, addauthor, and viewallbooks jsp pages, and updated index.jsp." />
   </component>
 </project>
