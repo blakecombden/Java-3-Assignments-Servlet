@@ -5,7 +5,7 @@
 </head>
 <body>
 
-Add a Book
+<h1>Add a Book</h1>
 
 <!--
     private String isbn;
@@ -15,26 +15,26 @@ Add a Book
     private String author;
 -->
 
-<h1>Add a Book!</h1>
-
-function confirm()
-{
-alert("Book added!");
-}
-
-<form action = "library-data" method = "POST" onsubmit="confirm()">
+<form action = "library-data" method = "POST">
     ISBN: <input type = "text" name = "isbn"> <br />
     Title: <input type = "text" name = "title" /> <br />
     Edition Number: <input type = "text" name = "edition_number" /> <br />
-    Copyright: <input type = "text" name = "copyright" />
-    Author: <input type = "text" name = "author" />
+    Copyright: <input type = "text" name = "copyright" /> <br />
+    Author: <input type = "text" name = "author" /> <br />
     <input type="hidden" id="view" name="view" value="book">
-    <input type = "submit" value = "Submit" />
+    <input type = "submit" value = "Submit" onclick="confirm()" />
 </form>
 
-</br>
-<a href="index.jsp">Back to Main Menu</a>
+<script>
+function confirm() {
+    alert("Book submitted!");
 
+}
+</script>
+
+</br>
+
+<a href="index.jsp">Back to Main Menu</a>
 
 </body>
 </html>

@@ -33,5 +33,7 @@ List of Books
 
 </table>
 
+<a href="index.jsp">Back to Main Menu</a>
+
 </body>
 </html>

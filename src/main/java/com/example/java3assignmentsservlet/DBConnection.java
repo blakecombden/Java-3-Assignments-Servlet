@@ -8,7 +8,6 @@ public class DBConnection {
      * @return Connection object
      */
     public static Connection initDatabase() throws SQLException {
-        Connection connection = DBConfig.getConnection();
-        return connection;
+        return DriverManager.getConnection(DBConfig.DB_URL + DBConfig.DB_BOOKS, DBConfig.DB_USER, DBConfig.DB_PASSWORD);
     }
 }

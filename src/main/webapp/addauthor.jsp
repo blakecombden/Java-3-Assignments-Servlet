@@ -16,19 +16,20 @@ Add an Author
 
 <h1>Add an Author!</h1>
 
-function confirm()
-{
-alert("Book added!");
-}
-
-<form action = "library-data" method = "POST" onsubmit="confirm()">
+<form action = "library-data" method = "POST">
     Author ID: <input type = "text" name = "author_id"> <br />
     First Name: <input type = "text" name = "first_name" /> <br />
     Last Name: <input type = "text" name = "last_name" /> <br />
     Book: <input type = "text" name = "book" />
     <input type="hidden" id="view" name="view" value="author">
-    <input type = "submit" value = "Submit" />
+    <input type = "submit" value = "Submit" onclick="confirm()" />
 </form>
+
+<script>
+    function confirm() {
+        alert("Book submitted!");
+    }
+</script>
 
 </br>
 

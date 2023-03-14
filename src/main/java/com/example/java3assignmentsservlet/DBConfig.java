@@ -46,12 +46,12 @@ public class DBConfig {
      */
     public static void doClassForNameRegistration(){
         try {
-            Class.forName(DBConfig.JDBC_DRIVER);
+            Class.forName(JDBC_DRIVER);
             System.out.println("DB driver registered using Class.forName()");
         }
         catch(ClassNotFoundException ex) {
             System.err.println("ClassNotFoundException: unable to load driver class.");
-            System.err.println("Driver name: " + DBConfig.JDBC_DRIVER);
+            System.err.println("Driver name: " + JDBC_DRIVER);
             System.exit(1);
         }
     }
@@ -63,7 +63,7 @@ public class DBConfig {
     public static void doRegisterDriverMethodRegistration(){
         try {
             Driver myDriver = new org.mariadb.jdbc.Driver();
-            DriverManager.registerDriver( myDriver );
+            DriverManager.registerDriver(myDriver);
             System.out.println("DB driver registered using registerDriver()");
         }
         catch (SQLException e) {
@@ -76,8 +76,20 @@ public class DBConfig {
      * Generate a connection to the books database
      * @return connection
      */
-    public static Connection getConnection(){
+    public static Connection getConnection() throws SQLException{
+        try {
+            Class.forName(JDBC_DRIVER).newInstance();
+            System.out.println("Option 1: Find the class worked!");
+        } catch (ClassNotFoundException ex) {
+            System.err.println("Error: unable to load driver class!");
+        } catch(IllegalAccessException ex) {
+            System.err.println("Error: access problem while loading!");
+        } catch(InstantiationException ex){
+            System.err.println("Error: unable to instantiate driver!");
+        }
+
         Connection connection = null;
+
         try{
             connection = DriverManager.getConnection(
                     DBConfig.DB_URL + DBConfig.DB_BOOKS,
