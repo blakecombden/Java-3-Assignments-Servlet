@@ -7,7 +7,7 @@
 
 <h1>Welcome to the Book Database!</h1>
 
-<li><a href="addbook.jsp">Add a book</a></li>
+<li><a href="library-data?view=authordropdown">Add a book</a></li>
 <li><a href="addauthor.jsp">Add an author</a></li>
 
 <!-- //TODO Add in a param to differentiate the books vs authors -->

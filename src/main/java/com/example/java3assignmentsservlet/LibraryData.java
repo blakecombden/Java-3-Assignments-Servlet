@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,13 +25,14 @@ public class LibraryData extends HttpServlet {
         //TODO Use a variable "view" to determine book or author query
 
         String view = request.getParameter("view");
+        List<Book> bookList = null;
+        List<Author> authorList = null;
 
         if(view.equals("booklist")) {
 
-            List<Book> bookList = null;
-
             try {
                 bookList = GetBooks.getAllBooks();
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallbooks.jsp");
                 request.setAttribute("booklist", bookList);
 
@@ -46,12 +46,24 @@ public class LibraryData extends HttpServlet {
 
         } else if (view.equals("authorlist")) {
 
-            List<Author> authorList = null;
-
             try {
                 authorList = GetAuthors.getAllAuthors();
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallauthors.jsp");
                 request.setAttribute("authorlist", authorList);
+
+                //TODO add the list to the request
+                requestDispatcher.forward(request, response);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                //TODO Navigate to some error page
+            }
+        } else if (view.equals("authordropdown")) {
+
+            try {
+                authorList = GetAuthors.getAllAuthors();
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("addbook.jsp");
+                request.setAttribute("authordropdown", authorList);
 
                 //TODO add the list to the request
                 requestDispatcher.forward(request, response);
@@ -70,14 +82,30 @@ public class LibraryData extends HttpServlet {
 
         if(view.equals("book")){
             try {
-                InsertBook.insertBook(
-                        new Book(
-                                request.getParameter("isbn"),
-                                request.getParameter("title"),
-                                Integer.valueOf(request.getParameter("edition_number")),
-                                request.getParameter("copyright")
-                        ));
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("addbook.jsp");
+
+                Book book = new Book(
+                        request.getParameter("isbn"),
+                        request.getParameter("title"),
+                        Integer.valueOf(request.getParameter("edition_number")),
+                        request.getParameter("copyright")
+                );
+
+                Author author = new Author(
+                        0, // placeholder since authorID in db is autoincrement
+                        request.getParameter("first_name"),
+                        request.getParameter("last_name")
+                );
+
+                book.setAuthor(author);
+                author.setBook(book);
+
+                InsertBook.insertBook(book);
+
+                InsertAuthor.insertAuthor(author);
+
+                InsertAuthorISBN.insertAuthorISBN(book, author);
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
@@ -89,10 +117,12 @@ public class LibraryData extends HttpServlet {
             try {
                 InsertAuthor.insertAuthor(
                         new Author(
-                                Integer.valueOf(request.getParameter("author_id")),
+                                0, // placeholder since authorID in db is autoincrement
                                 request.getParameter("first_name"),
                                 request.getParameter("last_name")
                         ));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+                requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();

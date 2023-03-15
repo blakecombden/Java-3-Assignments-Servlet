@@ -15,15 +15,14 @@ public class InsertAuthor {
     public static void insertAuthor(Author author) throws SQLException {
         Connection connection = DBConnection.initDatabase();
 
-        String sqlQuery = "INSERT INTO " + DBConfig.DB_BOOKS_AUTHORS_TABLE_NAME +
-                " VALUES (?,?,?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        String sql = "INSERT INTO authors (firstName, lastName) VALUES (?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setInt(1, author.getAuthorID());
-        preparedStatement.setString(2, author.getFirstName());
-        preparedStatement.setString(3, author.getLastName());
-        preparedStatement.setString(4, author.getBook().getTitle());
+        preparedStatement.setString(1, author.getFirstName());
+        preparedStatement.setString(2, author.getLastName());
 
         preparedStatement.executeQuery();
+
+        preparedStatement.close();
     }
 }

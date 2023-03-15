@@ -36,7 +36,7 @@ public class Author {
 
     public Book getBook() { return book; }
 
-    public void addBook(Book book) { this.book = book; }
+    public void setBook(Book book) { this.book = book; }
 
     public static void printAuthor(PrintStream printStream, Author author) {
         printStream.printf("\n%s %s (ID %d) Book: %s", author.getFirstName(),

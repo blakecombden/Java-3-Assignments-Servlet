@@ -7,7 +7,7 @@
 </head>
 <body>
 
-List of Authors
+<h2>List of Authors</h2>
 
 <% List<Author> authorList =  (List<Author>) request.getAttribute("authorlist"); %>
 
@@ -30,7 +30,7 @@ List of Authors
   %>
 
 </table>
-
+</br>
 <a href="index.jsp">Back to Main Menu</a>
 
 </body>

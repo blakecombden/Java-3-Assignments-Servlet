@@ -15,9 +15,8 @@ public class InsertBook {
     public static void insertBook(Book book) throws SQLException {
         Connection connection = DBConnection.initDatabase();
 
-        String sqlQuery = "INSERT INTO " + DBConfig.DB_BOOKS_TITLES_TABLE_NAME +
-                " VALUES (?,?,?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        String sql = "INSERT INTO titles (isbn, title, editionNumber, copyright) VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         preparedStatement.setString(1, book.getIsbn());
         preparedStatement.setString(2, book.getTitle());
@@ -25,5 +24,7 @@ public class InsertBook {
         preparedStatement.setString(4, book.getCopyright());
 
         preparedStatement.executeQuery();
+
+        preparedStatement.close();
     }
 }

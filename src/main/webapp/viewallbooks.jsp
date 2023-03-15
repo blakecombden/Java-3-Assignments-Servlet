@@ -7,7 +7,7 @@
 </head>
 <body>
 
-List of Books
+<h2>List of Books</h2>
 
 <% List<Book> bookList =  (List<Book>) request.getAttribute("booklist"); %>
 
@@ -28,11 +28,10 @@ List of Books
       out.println("<td>" + book.getCopyright() + "</td>");
       out.println("</tr>");
     }
-
   %>
 
 </table>
-
+</br>
 <a href="index.jsp">Back to Main Menu</a>
 
 </body>
