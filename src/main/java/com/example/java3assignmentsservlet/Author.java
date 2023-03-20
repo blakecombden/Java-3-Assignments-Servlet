@@ -14,7 +14,6 @@ public class Author {
     private int authorID;
     private String firstName;
     private String lastName;
-    private Book book;
 
     public Author(int authorID, String firstName, String lastName) {
         this.authorID = authorID;
@@ -34,12 +33,7 @@ public class Author {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public Book getBook() { return book; }
-
-    public void setBook(Book book) { this.book = book; }
-
     public static void printAuthor(PrintStream printStream, Author author) {
-        printStream.printf("\n%s %s (ID %d) Book: %s", author.getFirstName(),
-                author.getLastName(), author.getAuthorID(), author.getBook().getTitle());
+        printStream.printf("\n%s %s (ID %d) Book: %s", author.getFirstName(), author.getLastName(), author.getAuthorID());
     }
 }

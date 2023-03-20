@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- *
- *
+ * Connects to database and uses insert prepared statement to insert a new Book
  * @author blake
  */
 

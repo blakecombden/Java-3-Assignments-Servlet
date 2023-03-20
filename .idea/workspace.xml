@@ -10,13 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c608148-a3e7-4b5b-8a98-160c2df4f4da" name="Changes" comment="Added a GetAuthors class and a viewallauthors jsp page. Added hidden form fields to both addbook and addauthor. Added prepared statements in doPost for adding a book and adding an author (only separately for now). Added url variables, or &quot;views&quot;, that the doGet can handle and coded the respective queries. Added mariadb driver to tomcat lib folder in order to connect to database. Added navigation links to return to the main page.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthorISBN.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/LoadAuthorList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/GetAuthors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/GetAuthors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/GetBooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/GetBooks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthorISBN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertAuthorISBN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/InsertBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/LibraryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/LibraryData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/java3assignmentsservlet/LoadAuthorList.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/addauthor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/addauthor.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/addbook.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/addbook.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
@@ -132,6 +137,8 @@
       <workItem from="1678745013019" duration="14511000" />
       <workItem from="1678813012813" duration="3604000" />
       <workItem from="1678883657852" duration="13835000" />
+      <workItem from="1679244899903" duration="17000" />
+      <workItem from="1679310785810" duration="26573000" />
     </task>
     <task id="LOCAL-00001" summary="Created DBConnection class and LibraryData servlet. Copied over code for Author and Book classes, as well as DBConfig, from first assignment. Added a GetBooks class. Added addbook, addauthor, and viewallbooks jsp pages, and updated index.jsp.">
       <created>1678752060864</created>

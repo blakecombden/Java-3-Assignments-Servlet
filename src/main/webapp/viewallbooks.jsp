@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.java3assignmentsservlet.Book" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,31 +6,34 @@
 </head>
 <body>
 
-<h2>List of Books</h2>
+<h2>List of Books and their Authors</h2>
 
-<% List<Book> bookList =  (List<Book>) request.getAttribute("booklist"); %>
+<!-- Get "booklist" attribute from request -->
+<% List<List<String>> bookList =  (List<List<String>>) request.getAttribute("booklist"); %>
 
+<!-- Display data in table format -->
 <table>
   <tr>
     <th>ISBN</th>
     <th>Title</th>
     <th>Edition</th>
     <th>Copyright</th>
+    <th>Authors</th>
   </tr>
 
   <%
-    for (Book book: bookList) {
+    for (int i = 0; i < bookList.size(); ++i) {
       out.println("<tr>");
-      out.println("<td>" + book.getIsbn() + "</td>");
-      out.println("<td>" + book.getTitle() + "</td>");
-      out.println("<td>" + book.getEditionNumber() + "</td>");
-      out.println("<td>" + book.getCopyright() + "</td>");
+      for (int j = 0; j < bookList.get(i).size(); ++j) {
+        out.println("<td>" + bookList.get(i).get(j) + "</td>");
+      }
       out.println("</tr>");
     }
   %>
 
 </table>
 </br>
+<!-- Return to home page -->
 <a href="index.jsp">Back to Main Menu</a>
 
 </body>

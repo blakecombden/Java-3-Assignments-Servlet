@@ -1,34 +1,61 @@
 package com.example.java3assignmentsservlet;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.LinkedList;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetAuthors {
     /**
-     * Retrieve all authors from database into LinkedList.
-     * @return List of Author objects
+     * Retrieve all authors from database
+     * Then retrieve all authors for each book.
+     * @return List of Authors with their Books
      */
-    public static List<Author> getAllAuthors() throws SQLException {
-        LinkedList authorList = new LinkedList();
-
+    public static List<List<String>> getAllAuthors() throws SQLException {
+        // code a list to pass to jsp page, each item will be an array of info describing a single author
+        ArrayList authorList = new ArrayList();
         Connection connection = DBConnection.initDatabase();
-        Statement statement = connection.createStatement();
-        String sqlQuery = "SELECT * from " + DBConfig.DB_BOOKS_AUTHORS_TABLE_NAME;
 
-        ResultSet resultSet = statement.executeQuery(sqlQuery);
-        while(resultSet.next()) {
-            authorList.add(
-                    new Author(
-                            resultSet.getInt(DBConfig.DB_BOOKS_AUTHORS_AUTHOR_ID),
-                            resultSet.getString(DBConfig.DB_BOOKS_AUTHORS_FIRST_NAME),
-                            resultSet.getString(DBConfig.DB_BOOKS_AUTHORS_LAST_NAME)
-                    )
-            );
+        try {
+            // create statement to retrieve all data from authors table
+            Statement statement = connection.createStatement();
+            String allAuthorsQuery = "SELECT * from " + DBConfig.DB_BOOKS_AUTHORS_TABLE_NAME;
+            ResultSet allAuthorsResultSet = statement.executeQuery(allAuthorsQuery);
+
+            while(allAuthorsResultSet.next()) {
+                // code another list to place in first list
+                ArrayList authorAttributes = new ArrayList();
+
+                // create prepared statement that will get all books of each author in first result set.
+                String booksWithAuthorIDQuery = "SELECT title, isbn FROM titles WHERE isbn IN " +
+                        "(SELECT isbn FROM authorisbn WHERE authorid= ?)";
+
+                PreparedStatement preparedStatement = connection.prepareStatement(booksWithAuthorIDQuery);
+                preparedStatement.setInt(1, allAuthorsResultSet.getInt(DBConfig.DB_BOOKS_AUTHORS_AUTHOR_ID));
+                ResultSet booksWithAuthorIDResultSet = preparedStatement.executeQuery();
+
+                // add author data to attributes list
+                authorAttributes.add(allAuthorsResultSet.getString(DBConfig.DB_BOOKS_AUTHORS_AUTHOR_ID));
+                authorAttributes.add(allAuthorsResultSet.getString(DBConfig.DB_BOOKS_AUTHORS_FIRST_NAME) + " "
+                        + allAuthorsResultSet.getString(DBConfig.DB_BOOKS_AUTHORS_LAST_NAME));
+
+                // add the book for each author in first result set and add to attributes
+                String book;
+                while(booksWithAuthorIDResultSet.next()) {
+                    book = booksWithAuthorIDResultSet.getString(DBConfig.DB_BOOKS_TITLES_TITLE);
+                    authorAttributes.add(book);
+                }
+                preparedStatement.close();
+
+                // add list of attributes to first list
+                authorList.add(authorAttributes);
+
+            }
+            statement.close();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
+
         return authorList;
     }
 }

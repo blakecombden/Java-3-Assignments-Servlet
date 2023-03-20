@@ -15,7 +15,6 @@ public class Book {
     private String title;
     private int editionNumber;
     private String copyright;
-    private Author author;
 
     public Book(String isbn, String title, int editionNumber, String copyright) {
         this.isbn = isbn;
@@ -54,12 +53,8 @@ public class Book {
         this.copyright = copyright;
     }
 
-    public Author getAuthor() { return author; }
-
-    public void setAuthor(Author author){ this.author = author; }
-
     public static void printBook(PrintStream printStream, Book book){
         printStream.printf("\n%s, Edition %d (%s) ISBN: %S Author: %s %s", book.getTitle(), book.getEditionNumber(),
-                book.getCopyright(), book.getIsbn(), book.getAuthor().getFirstName(), book.getAuthor().getLastName());
+                book.getCopyright(), book.getIsbn());
     }
 }

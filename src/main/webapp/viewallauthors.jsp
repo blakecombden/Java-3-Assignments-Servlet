@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.java3assignmentsservlet.Author" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,30 +6,32 @@
 </head>
 <body>
 
-<h2>List of Authors</h2>
+<h2>List of Authors and their Books</h2>
 
-<% List<Author> authorList =  (List<Author>) request.getAttribute("authorlist"); %>
+<!-- Get "authorlist" attribute from request -->
+<% List<List<String>> authorList =  (List<List<String>>) request.getAttribute("authorlist"); %>
 
+<!-- Display data in table format -->
 <table>
   <tr>
     <th>Author ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
+    <th>Name</th>
+    <th>Books</th>
   </tr>
 
   <%
-    for (Author author: authorList) {
-      out.println("<tr>");
-      out.println("<td>" + author.getAuthorID() + "</td>");
-      out.println("<td>" + author.getFirstName() + "</td>");
-      out.println("<td>" + author.getLastName() + "</td>");
+    for (int i = 0; i < authorList.size(); ++i) {
+      out.println("<tr style=\"height:100px\">");
+      for (int j = 0; j < authorList.get(i).size(); ++j) {
+        out.println("<td style=\"width:600px\">" + authorList.get(i).get(j) + "</td>");
+      }
       out.println("</tr>");
     }
-
   %>
 
 </table>
 </br>
+<!-- Return to home page -->
 <a href="index.jsp">Back to Main Menu</a>
 
 </body>

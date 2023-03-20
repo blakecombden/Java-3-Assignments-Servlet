@@ -10,10 +10,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Overrides doPost and doGet methods, handles form submission data,
+ * inserts this data into database, and handles views of submitted data.
+ */
+
 @WebServlet(name = "libraryData", value = "/library-data")
 public class LibraryData extends HttpServlet {
 
     private String message;
+
+    /**
+     * Init method for service to instantiate attribute.
+     */
+
     public void init() {
         message = "Library Servlet!";
     }
@@ -22,21 +32,22 @@ public class LibraryData extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
 
-        //TODO Use a variable "view" to determine book or author query
-
+        // uses "view" variable to determine book or author query
         String view = request.getParameter("view");
-        List<Book> bookList = null;
-        List<Author> authorList = null;
+
+        // stores data to display in lists of lists
+        List<List<String>> bookList = null;
+        List<List<String>> authorList = null;
 
         if(view.equals("booklist")) {
 
             try {
+                // retrieve entire book list (with authors) and add to request
                 bookList = GetBooks.getAllBooks();
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallbooks.jsp");
                 request.setAttribute("booklist", bookList);
 
-                //TODO add the list to the request
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
@@ -47,25 +58,27 @@ public class LibraryData extends HttpServlet {
         } else if (view.equals("authorlist")) {
 
             try {
+                // retrieve entire author list (with books) and add to request
                 authorList = GetAuthors.getAllAuthors();
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallauthors.jsp");
                 request.setAttribute("authorlist", authorList);
 
-                //TODO add the list to the request
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 //TODO Navigate to some error page
             }
-        } else if (view.equals("authordropdown")) {
+        } else if (view.equals("addbook")) {
 
             try {
+                // retrieve entire author list and add to request
                 authorList = GetAuthors.getAllAuthors();
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("addbook.jsp");
-                request.setAttribute("authordropdown", authorList);
 
-                //TODO add the list to the request
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("addbook.jsp");
+                request.setAttribute("authorlist", authorList);
+
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
@@ -78,11 +91,12 @@ public class LibraryData extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // uses "view" variable to determine book and author query or just author query
         String view = request.getParameter("view");
 
         if(view.equals("book")){
             try {
-
+                // instantiate both objects
                 Book book = new Book(
                         request.getParameter("isbn"),
                         request.getParameter("title"),
@@ -96,40 +110,41 @@ public class LibraryData extends HttpServlet {
                         request.getParameter("last_name")
                 );
 
-                book.setAuthor(author);
-                author.setBook(book);
-
+                // insert into book and authorISBN tables
                 InsertBook.insertBook(book);
-
-                InsertAuthor.insertAuthor(author);
-
                 InsertAuthorISBN.insertAuthorISBN(book, author);
 
+                // go to home page
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                // navigate to error page
+                //TODO Navigate to some error page
             }
 
         } else if (view.equals("author")) {
             try {
-                InsertAuthor.insertAuthor(
-                        new Author(
-                                0, // placeholder since authorID in db is autoincrement
-                                request.getParameter("first_name"),
-                                request.getParameter("last_name")
-                        ));
+                // instantiate an author object
+                Author author = new Author(
+                        0, // placeholder since authorID in db is autoincrement
+                        request.getParameter("first_name"),
+                        request.getParameter("last_name")
+                );
+
+                // insert into authors table
+                InsertAuthor.insertAuthor(author);
+
+                // go to home page
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                // navigate to error page
+                //TODO Navigate to some error page
             }
         } else {
-            // navigate to error page
+            //TODO Navigate to some error page
         }
     }
 }

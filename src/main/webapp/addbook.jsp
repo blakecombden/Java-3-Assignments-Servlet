@@ -1,4 +1,3 @@
-<%@ page import="com.example.java3assignmentsservlet.Author" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -9,8 +8,10 @@
 
 <h2>Add a Book</h2>
 
-<% List<Author> authorList =  (List<Author>) request.getAttribute("authordropdown"); %>
+<!-- Get "authorlist" attribute from request -->
+<% List<List<String>> authorList =  (List<List<String>>)  request.getAttribute("authorlist"); %>
 
+<!-- Form inputs, including hidden field with "book" value -->
 <form action = "library-data" method = "POST">
     ISBN: <input type = "text" name = "isbn"> <br />
     Title: <input type = "text" name = "title" /> <br />
@@ -23,20 +24,19 @@
 </form>
 
 <h3>Current List of Authors</h3>
-
+<!-- Display data in table format for user to reference when adding author-->
 <table>
     <tr>
         <th>Author ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Name</th>
     </tr>
 
     <%
-        for (Author author: authorList) {
+        for (int i = 0; i < authorList.size(); ++i) {
             out.println("<tr>");
-            out.println("<td>" + author.getAuthorID() + "</td>");
-            out.println("<td>" + author.getFirstName() + "</td>");
-            out.println("<td>" + author.getLastName() + "</td>");
+            for (int j = 0; j < 2; ++j) {
+                out.println("<td>" + authorList.get(i).get(j) + "</td>");
+            }
             out.println("</tr>");
         }
     %>
@@ -44,14 +44,14 @@
 </table>
 
 <script>
-function confirm() {
-    alert("Book submitted!");
-
-}
+    <!-- Function to alert user -->
+    function confirm() {
+        alert("Book submitted!");
+    }
 </script>
 
 </br>
-
+<!-- Return to home page -->
 <a href="index.jsp">Back to Main Menu</a>
 
 </body>
