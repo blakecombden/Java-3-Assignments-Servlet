@@ -18,12 +18,17 @@ import java.util.List;
 @WebServlet(name = "libraryData", value = "/library-data")
 public class LibraryData extends HttpServlet {
 
-    private String message;
+    // stores data to display in lists of lists
+    List<List<String>> bookList = null;
+    List<List<String>> authorList = null;
 
+    // initiate RequestDispatcher object
+    RequestDispatcher requestDispatcher = null;
+
+    private String message;
     /**
      * Init method for service to instantiate attribute.
      */
-
     public void init() {
         message = "Library Servlet!";
     }
@@ -35,24 +40,21 @@ public class LibraryData extends HttpServlet {
         // uses "view" variable to determine book or author query
         String view = request.getParameter("view");
 
-        // stores data to display in lists of lists
-        List<List<String>> bookList = null;
-        List<List<String>> authorList = null;
-
         if(view.equals("booklist")) {
 
             try {
                 // retrieve entire book list (with authors) and add to request
                 bookList = GetBooks.getAllBooks();
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallbooks.jsp");
+                requestDispatcher = request.getRequestDispatcher("viewallbooks.jsp");
                 request.setAttribute("booklist", bookList);
 
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                //TODO Navigate to some error page
+                requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+                requestDispatcher.forward(request, response);
             }
 
         } else if (view.equals("authorlist")) {
@@ -61,14 +63,15 @@ public class LibraryData extends HttpServlet {
                 // retrieve entire author list (with books) and add to request
                 authorList = GetAuthors.getAllAuthors();
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("viewallauthors.jsp");
+                requestDispatcher = request.getRequestDispatcher("viewallauthors.jsp");
                 request.setAttribute("authorlist", authorList);
 
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                //TODO Navigate to some error page
+                requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+                requestDispatcher.forward(request, response);
             }
         } else if (view.equals("addbook")) {
 
@@ -76,14 +79,15 @@ public class LibraryData extends HttpServlet {
                 // retrieve entire author list and add to request
                 authorList = GetAuthors.getAllAuthors();
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("addbook.jsp");
+                requestDispatcher = request.getRequestDispatcher("addbook.jsp");
                 request.setAttribute("authorlist", authorList);
 
                 requestDispatcher.forward(request, response);
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                //TODO Navigate to some error page
+                requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
     }
@@ -120,7 +124,8 @@ public class LibraryData extends HttpServlet {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                //TODO Navigate to some error page
+                requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+                requestDispatcher.forward(request, response);
             }
 
         } else if (view.equals("author")) {
@@ -141,10 +146,12 @@ public class LibraryData extends HttpServlet {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                //TODO Navigate to some error page
+                requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+                requestDispatcher.forward(request, response);
             }
         } else {
-            //TODO Navigate to some error page
+            requestDispatcher = request.getRequestDispatcher("errorpage.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }
